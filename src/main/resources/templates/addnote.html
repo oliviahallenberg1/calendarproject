@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add note
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/595/595233.png">
+
+</head>
+
+<body>
+    <div>
+        <form th:object="${note}" th:action="@{save-note}" action="#" method="post">
+            <label for="title">Title</label>
+            <input type="text" id="title" th:field="*{title}" />
+            <br>
+            <label for="description">Description</label>
+            <input type="text" id="description" th:field="*{description}" />
+            <br>
+            <input type="submit" value="Save"></input>
+        </form>
+    </div>
+</body>
+
+</html>
