@@ -40,6 +40,16 @@ public class EventController {
         return "calendar";
     }
 
+    @GetMapping(value = "/allmonths")
+    public String showAllMonths(Model model) {
+        model.addAttribute("standardDate", new Date());
+        List<Event> events = (List<Event>) eventRepository.findAll();
+        model.addAttribute("events", events);
+        List<Note> notes = (List<Note>) noteRepository.findAll();
+        model.addAttribute("notes", notes);
+        return "allmonths";
+    }
+
     @GetMapping(value = "/addevent")
     public String addEvent(Model model) {
         model.addAttribute("event", new Event());

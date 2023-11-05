@@ -19,9 +19,12 @@
         </form>
         </div>
     </header>
+
     <h1 th:text="'Kalenteri'"></h1>
 
-    <table>
+    <h2>Lokakuu</h2>
+
+    <table id="lokakuu">
         <tr>
             <th>Ma</th>
             <th>Ti</th>
@@ -32,40 +35,39 @@
             <th>Su</th>
         </tr>
         <tr>
-            <td>
-                <span th:each="event : ${events}" th:if="${#dates.dayOfWeek(event.startDate) == 1}"
-                    th:text="${event.title}"></span>
-            </td>
-            <td>
-                <span th:each="event : ${events}" th:if="${#dates.dayOfWeek(event.startDate) == 2}"
-                    th:text="${event.title}"></span>
-            </td>
-            <td>
-                <span th:each="event : ${events}" th:if="${#dates.dayOfWeek(event.startDate) == 3}"
-                    th:text="${event.title}"></span>
-            </td>
-            <td>
-                <span th:each="event : ${events}" th:if="${#dates.dayOfWeek(event.startDate) == 4}"
-                    th:text="${event.title}"></span>
-            </td>
-            <td>
-                <span th:each="event : ${events}" th:if="${#dates.dayOfWeek(event.startDate) == 5}"
-                    th:text="${event.title}"></span>
-            </td>
-            <td>
-                <span th:each="event : ${events}" th:if="${#dates.dayOfWeek(event.startDate) == 6}"
-                    th:text="${event.title}"></span>
-            </td>
-            <td>
-                <span th:each="event : ${events}" th:if="${#dates.dayOfWeek(event.startDate) == 7}"
-                    th:text="${event.title}"></span>
+            <td th:each="day : ${#numbers.sequence(1, 7)}">
+                <span th:each="event : ${events}"
+                    th:if="${#dates.dayOfWeek(event.startDate) == day and #dates.month(event.startDate) == 10}"
+                    th:text="${#dates.format(event.startDate, 'd.')} + ' ' + ${event.title}"></span>
             </td>
         </tr>
+
     </table>
     <a href="/addevent">Add Event</a>
 
+    <h2>Marraskuu</h2>
+    <table id="marraskuu">
+        <tr>
+            <th>Ma</th>
+            <th>Ti</th>
+            <th>Ke</th>
+            <th>To</th>
+            <th>Pe</th>
+            <th>La</th>
+            <th>Su</th>
+        </tr>
+        <tr>
+            <td th:each="day : ${#numbers.sequence(1, 7)}">
+                <span th:each="event : ${events}"
+                    th:if="${#dates.dayOfWeek(event.startDate) == day and #dates.month(event.startDate) == 11}"
+                    th:text="${#dates.format(event.startDate, 'dd.MM.yyyy')} and ${event.title}"></span>
+            </td>
+        </tr>
+    </table>
 
-    <h1 th:text="'Tapahtumalistaus'"></h1>
+    <a href="/addevent">Add Event</a>
+
+    <h1 th:text="'Tapahtumat listana'"></h1>
     <table>
         <tr>
             <th>Title</th>
