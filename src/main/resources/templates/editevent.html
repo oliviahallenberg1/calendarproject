@@ -6,7 +6,6 @@
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/595/595233.png">
-
 </head>
 
 <body>
@@ -15,9 +14,9 @@
         <input type="hidden" id="id" th:field="*{eventId}" readonly="readonly" />
         <p>Title: <input type="text" th:field="${event.title}" /></p>
         <p>Description: <input type="text" th:field="${event.description}" /></p>
-        <p>Start date: <input type="Date" th:field="${event.startDate}" /></p>
+        <p>Start date: <input type="date" th:field="${event.startDate}" /></p>
         <p>Start time: <input type="time" th:field="${event.startTime}" /></p>
-        <p>End date: <input type="Date" th:field="${event.endDate}" /></p>
+        <p>End date: <input type="date" th:field="${event.endDate}" /></p>
         <p>End time: <input type="time" th:field="${event.endTime}" /></p>
 
         <input type="submit" value="Save" />

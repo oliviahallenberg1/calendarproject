@@ -1,5 +1,6 @@
 package hh.sof03.kalenteriprojekti.web;
 
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -23,10 +24,8 @@ public class EventController {
 
     @Autowired
     EventRepository eventRepository;
-
     @Autowired
     NoteRepository noteRepository;
-
     @Autowired
     EventTypeRepository eventTypeRepository;
 
@@ -34,6 +33,8 @@ public class EventController {
     public String showAllEvents(Model model) {
         model.addAttribute("standardDate", new Date());
         List<Event> events = (List<Event>) eventRepository.findAll();
+        // tapahtumien sorttaus järjestykseen startDaten mukaan
+        events.sort(Comparator.comparing(Event::getStartDate));
         model.addAttribute("events", events);
         List<Note> notes = (List<Note>) noteRepository.findAll();
         model.addAttribute("notes", notes);
@@ -44,6 +45,8 @@ public class EventController {
     public String showAllMonths(Model model) {
         model.addAttribute("standardDate", new Date());
         List<Event> events = (List<Event>) eventRepository.findAll();
+        // tapahtumien sorttaus järjestykseen startDaten mukaan
+        events.sort(Comparator.comparing(Event::getStartDate));
         model.addAttribute("events", events);
         List<Note> notes = (List<Note>) noteRepository.findAll();
         model.addAttribute("notes", notes);
