@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,10 +23,14 @@ public class Event {
     private String title;
     private String description;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = true)
     private Date startDate;
+    @Column(nullable = true)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
+    @Column(nullable = true)
     private String startTime;
+    @Column(nullable = true)
     private String endTime;
     @ManyToOne
     @JsonIgnoreProperties("events")

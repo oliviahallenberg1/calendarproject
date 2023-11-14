@@ -6,10 +6,13 @@
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/595/595233.png">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 
 </head>
 
 <body>
+
+    <h1>Add new note</h1>
     <div>
         <form th:object="${note}" th:action="@{save-note}" action="#" method="post">
             <label for="title">Title</label>
@@ -18,7 +21,7 @@
             <label for="description">Description</label>
             <input type="text" id="description" th:field="*{description}" />
             <br>
-            <input type="submit" value="Save"></input>
+            <input class="btn btn-success" type="submit" value="Save"></input>
         </form>
     </div>
 </body>

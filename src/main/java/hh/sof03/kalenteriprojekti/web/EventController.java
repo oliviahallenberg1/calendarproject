@@ -34,7 +34,9 @@ public class EventController {
         model.addAttribute("standardDate", new Date());
         List<Event> events = (List<Event>) eventRepository.findAll();
         // tapahtumien sorttaus järjestykseen startDaten mukaan
-        events.sort(Comparator.comparing(Event::getStartDate));
+        // nullsLast metodilla estetään päivämäärän puuttumisesta johtuvat
+        // error-tilanteet
+        events.sort(Comparator.comparing(Event::getStartDate, Comparator.nullsLast(Comparator.naturalOrder())));
         model.addAttribute("events", events);
         List<Note> notes = (List<Note>) noteRepository.findAll();
         model.addAttribute("notes", notes);
@@ -46,7 +48,7 @@ public class EventController {
         model.addAttribute("standardDate", new Date());
         List<Event> events = (List<Event>) eventRepository.findAll();
         // tapahtumien sorttaus järjestykseen startDaten mukaan
-        events.sort(Comparator.comparing(Event::getStartDate));
+        // events.sort(Comparator.comparing(Event::getStartDate));
         model.addAttribute("events", events);
         List<Note> notes = (List<Note>) noteRepository.findAll();
         model.addAttribute("notes", notes);

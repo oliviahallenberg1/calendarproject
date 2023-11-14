@@ -6,6 +6,7 @@
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/595/595233.png">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 
 </head>
 
@@ -15,7 +16,7 @@
             <input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
             <p>Title: <input type="text" th:field="${note.title}" /></p>
             <p>Description: <input type="text" th:field="${note.description}" /></p>
-            <input type="submit" value="Save" />
+            <input class="btn btn-success"type="submit" value="Save" />
         </form>
     </div>
 </body>

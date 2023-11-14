@@ -21,7 +21,7 @@ public class EventType {
     private String eventTypeName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventType")
     @JsonIgnore
-    @JsonIgnoreProperties("eventtype")
+    @JsonIgnoreProperties("eventType")
     private List<Event> events;
 
     // konstruktorit

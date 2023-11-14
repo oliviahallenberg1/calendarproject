@@ -27,6 +27,12 @@ public class NoteController {
         return "notes";
     }
 
+    @GetMapping(value = "/addnote")
+    public String addNote(Model model) {
+        model.addAttribute("note", new Note());
+        return "addnote";
+    }
+
     @GetMapping(value = "/delete-note/{id}")
     public String deleteNote(@PathVariable("id") Long noteId, Model model) {
         noteRepository.deleteById(noteId);

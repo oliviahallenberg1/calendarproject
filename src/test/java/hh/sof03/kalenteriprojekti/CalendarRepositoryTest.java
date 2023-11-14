@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import hh.sof03.kalenteriprojekti.domain.Event;
 import hh.sof03.kalenteriprojekti.domain.EventRepository;
+import hh.sof03.kalenteriprojekti.domain.EventType;
+import hh.sof03.kalenteriprojekti.domain.EventTypeRepository;
 import hh.sof03.kalenteriprojekti.domain.Note;
 import hh.sof03.kalenteriprojekti.domain.NoteRepository;
 import hh.sof03.kalenteriprojekti.domain.User;
@@ -20,6 +22,8 @@ public class CalendarRepositoryTest {
 
     @Autowired
     private EventRepository eventRepository;
+    @Autowired
+    private EventTypeRepository eventTypeRepository;
     @Autowired
     private NoteRepository noteRepository;
     @Autowired
@@ -32,6 +36,13 @@ public class CalendarRepositoryTest {
         Event e = new Event();
         eventRepository.save(e);
         assertThat(e.getEventId()).isNotNull();
+    }
+
+    @Test // uuden tapahtumatyypin luonti
+    public void createNewEventType() {
+        EventType et = new EventType();
+        eventTypeRepository.save(et);
+        assertThat(et.getEventTypeId()).isNotNull();
     }
 
     @Test // uuden muistiinpanon luonti
@@ -57,6 +68,14 @@ public class CalendarRepositoryTest {
         assertThat(evs).hasSize(2);
     }
 
+    @Test // testi tapahtumatyypin poistamista varten
+    public void deleteEventType() {
+        List<EventType> ets = (List<EventType>) eventTypeRepository.findAll();
+        eventTypeRepository.deleteById((long) 1);
+        ets = (List<EventType>) eventTypeRepository.findAll();
+        assertThat(ets).hasSize(2);
+    }
+
     @Test // testi muistiinpanon poistamista varten
     public void deleteNote() {
         List<Note> ns = (List<Note>) noteRepository.findAll();
@@ -65,7 +84,7 @@ public class CalendarRepositoryTest {
         assertThat(ns).hasSize(1);
     }
 
-    @Test // käyttäjän poistaminen
+    @Test // testi käyttäjän poistaminen
     public void deleteUser() {
         List<User> users = (List<User>) userRepository.findAll();
         userRepository.deleteById((long) 1);
@@ -74,4 +93,17 @@ public class CalendarRepositoryTest {
     }
 
     // SEARCH-testit
-}
+
+    // @Test // tapahtuman etsiminen tapahtumatyypin perusteella
+    // public void searchByEventTypeNameShouldReturnEvent() {
+    //     List<Event> evs = eventRepository.findByEventTypeName("Koulu");
+    //     assertThat(evs).hasSize(1);
+    //     assertThat(evs.get(0).getTitle()).isEqualTo("Backend-lopputyö");
+    // }
+
+    @Test // muistinhakeminen nimen perusteella
+    void searchByEventTitleShouldReturnEvent() {
+        
+    }
+} 
+    
