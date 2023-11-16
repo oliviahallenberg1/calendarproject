@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import hh.sof03.kalenteriprojekti.domain.EventType;
 import hh.sof03.kalenteriprojekti.domain.EventTypeRepository;
 import jakarta.validation.Valid;
@@ -21,6 +22,8 @@ public class EventTypeController {
 
     @Autowired
     EventTypeRepository eventTypeRepository;
+     @Autowired
+    EvenRepository eventRepository;
 
     @GetMapping(value = { "/eventtypes" })
     public String showAllEventTypes(Model model) {
@@ -70,5 +73,6 @@ public class EventTypeController {
             return "redirect:/eventtypes";
         }
     }
+
 
 }

@@ -65,7 +65,7 @@ public class CalendarRepositoryTest {
         List<Event> evs = (List<Event>) eventRepository.findAll();
         eventRepository.deleteById((long) 1);
         evs = (List<Event>) eventRepository.findAll();
-        assertThat(evs).hasSize(2);
+        assertThat(evs).hasSize(8);
     }
 
     @Test // testi tapahtumatyypin poistamista varten
@@ -81,7 +81,7 @@ public class CalendarRepositoryTest {
         List<Note> ns = (List<Note>) noteRepository.findAll();
         noteRepository.deleteById((long) 1);
         ns = (List<Note>) noteRepository.findAll();
-        assertThat(ns).hasSize(1);
+        assertThat(ns).hasSize(3);
     }
 
     @Test // testi käyttäjän poistaminen
@@ -94,16 +94,17 @@ public class CalendarRepositoryTest {
 
     // SEARCH-testit
 
-    //  @Test // tapahtuman etsiminen tapahtumatyypin perusteella
-    //  public void searchByEventTypeNameShouldReturnEvent() {
-    //      List<Event> evs = eventRepository.findByEventTypeName("Koulu");
-    //      assertThat(evs).hasSize(1);
-    //      assertThat(evs.get(0).getTitle()).isEqualTo("Backend-lopputyö");
-    //  }
-
-    @Test // muistinhakeminen nimen perusteella
-    void searchByEventTitleShouldReturnEvent() {
-        
+    @Test // tapahtuman etsiminen tapahtumatyypin perusteella
+    public void searchByEventTypeNameShouldReturnEvent() {
+        List<Event> evs = eventRepository.findByEventTypeEventTypeName("Koulu");
+        assertThat(evs).hasSize(3);
+        assertThat(evs.get(0).getTitle()).isEqualTo("Backend-lopputyö");
     }
-} 
-    
+
+    @Test // tapahtumatyypin etsiminen nimen perusteella
+    public void findEventTypeByName() {
+        List<EventType> evs = eventTypeRepository.findByEventTypeName("Työt");
+        assertThat(evs).hasSize(1);
+        assertThat(evs.get(0).getEventTypeId()).isEqualTo(1);
+    }
+}
