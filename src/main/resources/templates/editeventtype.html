@@ -21,6 +21,7 @@
     <div>
         <form th:object="${eventtype}" th:action="@{/save-eventtype-edits}" method="post">
             <input type="hidden" th:field="*{eventTypeId}" class="form-control" />
+            <div th:if="${#fields.hasErrors('eventTypeName')}" th:errors="*{eventTypeName}">Error</div>
             <input type="text" th:field="*{eventTypeName}" />
             <input type="submit" value="Submit" />
     </div>

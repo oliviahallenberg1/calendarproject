@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import hh.sof03.kalenteriprojekti.domain.EventType;
 import hh.sof03.kalenteriprojekti.domain.EventTypeRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class EventTypeController {
@@ -40,9 +42,15 @@ public class EventTypeController {
     }
 
     @PostMapping(value = "/save-eventtype")
-    public String saveNote(@ModelAttribute EventType eventType) {
-        eventTypeRepository.save(eventType);
-        return "redirect:/eventtypes";
+    public String saveNote(@Valid EventType eventType, BindingResult br, Model model) {
+        model.addAttribute("eventtypes", eventTypeRepository.findAll());
+        if (br.hasErrors()) {
+            return "/addeventtype";
+        } else {
+            eventTypeRepository.save(eventType);
+            return "redirect:/eventtypes";
+        }
+
     }
 
     @GetMapping(value = "/edit-eventtype/{id}")
@@ -53,9 +61,14 @@ public class EventTypeController {
     }
 
     @PostMapping(value = "/save-eventtype-edits")
-    public String saveEdits(@ModelAttribute("eventtype") EventType eventType) {
-        eventTypeRepository.save(eventType);
-        return "redirect:/eventtypes";
+    public String saveEventTypeEdits(@Valid @ModelAttribute("eventtype") EventType eventType, BindingResult br,
+            Model model) {
+        if (br.hasErrors()) {
+            return "editeventtype";
+        } else {
+            eventTypeRepository.save(eventType);
+            return "redirect:/eventtypes";
+        }
     }
 
 }

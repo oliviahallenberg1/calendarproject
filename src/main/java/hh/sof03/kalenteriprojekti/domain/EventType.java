@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotEmpty;
+
 
 @Entity
 public class EventType {
@@ -18,6 +20,7 @@ public class EventType {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long eventTypeId;
+    @NotEmpty
     private String eventTypeName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eventType")
     @JsonIgnore

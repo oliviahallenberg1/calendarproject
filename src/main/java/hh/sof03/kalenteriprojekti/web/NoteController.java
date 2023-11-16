@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import hh.sof03.kalenteriprojekti.domain.Note;
 import hh.sof03.kalenteriprojekti.domain.NoteRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class NoteController {
@@ -40,9 +42,15 @@ public class NoteController {
     }
 
     @PostMapping(value = "/save-note")
-    public String saveNote(@ModelAttribute Note note) {
-        noteRepository.save(note);
-        return "redirect:/calendar";
+    public String saveEvent(@Valid Note note, BindingResult br, Model model) {
+        model.addAttribute("notes", noteRepository.findAll());
+        if (br.hasErrors()) {
+            return "/addnote";
+        } else {
+
+            noteRepository.save(note);
+            return "redirect:/calendar";
+        }
     }
 
     @GetMapping(value = "/edit-note/{id}")
@@ -53,9 +61,14 @@ public class NoteController {
     }
 
     @PostMapping(value = "/save-note-edits")
-    public String saveEdits(@ModelAttribute("note") Note note) {
-        noteRepository.save(note);
-        return "redirect:/calendar";
+    public String saveEdits(@Valid @ModelAttribute("note") Note note, BindingResult br, Model model) {
+        if (br.hasErrors()) {
+            return "editnote";
+        } else {
+            noteRepository.save(note);
+            return "redirect:/calendar";
+        }
+
     }
 
 }

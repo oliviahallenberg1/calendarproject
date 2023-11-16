@@ -8,18 +8,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import hh.sof03.kalenteriprojekti.domain.Event;
 import hh.sof03.kalenteriprojekti.domain.EventRepository;
 import hh.sof03.kalenteriprojekti.domain.EventTypeRepository;
 import hh.sof03.kalenteriprojekti.domain.Note;
 import hh.sof03.kalenteriprojekti.domain.NoteRepository;
+import jakarta.validation.Valid;
 
 @Controller
 public class EventController {
@@ -31,7 +31,7 @@ public class EventController {
     @Autowired
     EventTypeRepository eventTypeRepository;
 
-    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    @GetMapping(value = { "/", "/index" })
     public String welcome() {
         return "index";
     }
@@ -70,9 +70,14 @@ public class EventController {
     }
 
     @PostMapping(value = "/save-event")
-    public String saveEvent(@ModelAttribute Event event) {
-        eventRepository.save(event);
-        return "redirect:/calendar";
+    public String saveEvent(@Valid Event event, BindingResult br, Model model) {
+        model.addAttribute("events", eventRepository.findAll());
+        if (br.hasErrors()) {
+            return "/addevent";
+        } else {
+            eventRepository.save(event);
+            return "redirect:/calendar";
+        }
     }
 
     @GetMapping(value = "/edit-event/{id}")
@@ -84,9 +89,13 @@ public class EventController {
     }
 
     @PostMapping(value = "/save-event-edits")
-    public String saveEdits(@ModelAttribute("event") Event event) {
-        eventRepository.save(event);
-        return "redirect:/calendar";
+    public String saveEdits(@Valid @ModelAttribute("event") Event event, BindingResult br, Model model) {
+        if (br.hasErrors()) {
+            return "editevent";
+        } else {
+            eventRepository.save(event);
+            return "redirect:/calendar";
+        }
     }
 
     @GetMapping(value = "/delete-event/{id}")
