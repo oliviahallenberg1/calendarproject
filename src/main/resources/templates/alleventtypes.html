@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 
 <head>
     <title>Event types
@@ -20,17 +21,16 @@
 
     <table class="table table-striped">
         <tr>
-            <th>Name
-            </th>
+            <th>Name</th>
             <th></th>
-            <th></th>
+            <th sec:authorize="hasAuthority('ADMIN')"> </th>
         </tr>
         <tr th:each="eventtype : ${eventtypes}">
             <td th:text=" ${eventtype.eventTypeName}"></td>
             <td>
                 <a class="btn btn-primary" th:href="@{/edit-eventtype/{id}(id=${eventtype.eventTypeId})}">Edit</a>
             </td>
-            <td>
+            <td sec:authorize="hasAuthority('ADMIN')">
                 <a class="btn btn-danger" th:href="@{/delete-eventtype/{id}(id=${eventtype.eventTypeId})}">Delete</a>
             </td>
 

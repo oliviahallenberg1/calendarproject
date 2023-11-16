@@ -22,11 +22,11 @@ public class NoteController {
     @Autowired
     NoteRepository noteRepository;
 
-    @GetMapping(value = { "/notes" })
+    @GetMapping(value = { "/allnotes" })
     public String showAllNotes(Model model) {
         List<Note> notes = (List<Note>) noteRepository.findAll();
         model.addAttribute("notes", notes);
-        return "notes";
+        return "allnotes";
     }
 
     @GetMapping(value = "/addnote")

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 
 <head>
     <title>Calendar
@@ -18,11 +19,13 @@
 <body>
     <header>
         <div class="col-md-4"></div>
-        <p>Now logged in: <span sec:authentication="name"></span></p>
+       
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Log Out" />
+            <input type="submit" value="Log Out" class="btn btn-sm btn-danger" />
         </form>
         </div>
+
+        <br>
     </header>
 
     <h1 th:text="'Calendar'"></h1>
