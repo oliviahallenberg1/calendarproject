@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Event types
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" type="image/x-icon"
+        href="https://icons.iconarchive.com/icons/paomedia/small-n-flat/512/calendar-icon.png">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <style>
+        body {
+            padding: 1%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Event types</h1>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Name
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="eventtype : ${eventtypes}">
+            <td th:text=" ${eventtype.eventTypeName}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/edit-eventtype/{id}(id=${eventtype.eventTypeId})}">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" th:href="@{/delete-eventtype/{id}(id=${eventtype.eventTypeId})}">Delete</a>
+            </td>
+
+        </tr>
+    </table>
+    <a href="/addeventtype" class="btn-success">Add new event type</a>
+    <a href="/index" class="btn btn-primary">Back to homepage</a>
+    
+</body>
+
+</html>

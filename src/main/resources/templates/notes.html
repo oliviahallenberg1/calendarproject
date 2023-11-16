@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Notes only
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" type="image/x-icon"
+        href="https://icons.iconarchive.com/icons/paomedia/small-n-flat/512/calendar-icon.png">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <style>
+        body {
+            padding: 1%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Notes</h1>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Title
+            </th>
+            <th>Description
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="note : ${notes}">
+            <td th:text=" ${note.title}"></td>
+            <td th:text=" ${note.description}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/edit-note/{id}(id=${note.id})}">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" th:href="@{/delete-note/{id}(id=${note.id})}">Delete</a>
+            </td>
+
+        </tr>
+    </table>
+    <a href="/addnote" class="btn btn-primary">Add Note</a>
+
+    <a href="/calendar" class="btn btn-primary">Go to calendar</a>
+
+    <a href="/index" class="btn btn-primary">Back to homepage</a>
+</body>
+
+</html>

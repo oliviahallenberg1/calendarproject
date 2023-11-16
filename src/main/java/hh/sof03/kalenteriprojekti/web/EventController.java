@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import hh.sof03.kalenteriprojekti.domain.Event;
 import hh.sof03.kalenteriprojekti.domain.EventRepository;
@@ -29,7 +31,12 @@ public class EventController {
     @Autowired
     EventTypeRepository eventTypeRepository;
 
-    @GetMapping(value = { "/", "/calendar" })
+    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    public String welcome() {
+        return "index";
+    }
+
+    @GetMapping(value = { "/calendar" })
     public String showAllEvents(Model model) {
         model.addAttribute("standardDate", new Date());
         List<Event> events = (List<Event>) eventRepository.findAll();

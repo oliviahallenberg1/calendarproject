@@ -94,12 +94,12 @@ public class CalendarRepositoryTest {
 
     // SEARCH-testit
 
-    // @Test // tapahtuman etsiminen tapahtumatyypin perusteella
-    // public void searchByEventTypeNameShouldReturnEvent() {
-    //     List<Event> evs = eventRepository.findByEventTypeName("Koulu");
-    //     assertThat(evs).hasSize(1);
-    //     assertThat(evs.get(0).getTitle()).isEqualTo("Backend-lopputyö");
-    // }
+    //  @Test // tapahtuman etsiminen tapahtumatyypin perusteella
+    //  public void searchByEventTypeNameShouldReturnEvent() {
+    //      List<Event> evs = eventRepository.findByEventTypeName("Koulu");
+    //      assertThat(evs).hasSize(1);
+    //      assertThat(evs.get(0).getTitle()).isEqualTo("Backend-lopputyö");
+    //  }
 
     @Test // muistinhakeminen nimen perusteella
     void searchByEventTitleShouldReturnEvent() {

@@ -1,6 +1,6 @@
 package hh.sof03.kalenteriprojekti.domain;
 
-import java.util.List;
+
 
 import org.springframework.data.repository.CrudRepository;
 

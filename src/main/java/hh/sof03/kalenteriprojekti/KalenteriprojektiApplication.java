@@ -42,21 +42,44 @@ public class KalenteriprojektiApplication {
 
 			SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 
-			Event e1 = new Event("Työvuoro", "posti", df.parse("01.10.2023"), df.parse("01.10.2023"), "14:30", "20:30",
+			Event e1 = new Event("Työvuoro", "iltaposti", df.parse("01.10.2023"), df.parse("01.10.2023"), "14:30",
+					"20:30",
 					et1);
 			Event e2 = new Event("Backend-lopputyö", "lopputyön palautus", df.parse("07.10.2023"),
 					df.parse("07.10.2023"), "12:00", "12:00", et2);
-			Event e3 = new Event("Illallinen", "syömään kavereiden kanssa", df.parse("25.10.2023"),
+			Event e3 = new Event("Työvuoro", "päikkävuoro", df.parse("18.11.2023"),
+					df.parse("18.11.2023"), "16:15", "23:15", et1);
+			Event e4 = new Event("Työvuoro", "iltaposti", df.parse("05.11.2023"),
+					df.parse("05.11.2023"), "18:00", "22:00", et1);
+			Event e5 = new Event("Illallinen", "syömään kavereiden kanssa", df.parse("25.10.2023"),
 					df.parse("25.10.2023"), "18:00", "22:00", et3);
+			Event e6 = new Event("Valmistujaiset", "valmistujaisillallinen äidin kanssa", df.parse("06.12.2023"),
+					df.parse("06.12.2023"), "18:00", "22:00", et3);
+			Event e7 = new Event("Frontend-lopputyö", "fronttityön palautus", df.parse("25.11.2023"),
+					df.parse("25.10.2023"), "00:00", "00:00", et2);
+			Event e8 = new Event("Aussi-matka", "Lähtö Australiaan", df.parse("12.12.2023"),
+					df.parse("31.12.2023"), "06:00", "07:00", et3);
+			Event e9 = new Event("Vaihtoapuraha", "Vaihtoapurahan hakemisen deadline", df.parse("30.11.2023"),
+					df.parse("30.11.2023"), "16:00", "16:00", et2);
 
 			eventRepository.save(e1);
 			eventRepository.save(e2);
 			eventRepository.save(e3);
+			eventRepository.save(e4);
+			eventRepository.save(e5);
+			eventRepository.save(e6);
+			eventRepository.save(e7);
+			eventRepository.save(e8);
+			eventRepository.save(e9);
 
 			Note n1 = new Note("Muistutus", "tee läksyt");
 			Note n2 = new Note("TODO", "Lisää lopputyö gittiin");
+			Note n3 = new Note("TODO", "Palauta Elisan paita");
+			Note n4 = new Note("TODO", "Siivoa jääkaappi");
 			noteRepository.save(n1);
 			noteRepository.save(n2);
+			noteRepository.save(n3);
+			noteRepository.save(n4);
 
 			log.info("fetch all eventtypes");
 			for (EventType eventType : eventTypeRepository.findAll()) {

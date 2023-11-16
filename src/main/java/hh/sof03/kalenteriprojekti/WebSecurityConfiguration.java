@@ -41,7 +41,7 @@ public class WebSecurityConfiguration {
                                                 .frameOptions(frameoptions -> frameoptions
                                                                 .disable()))
                                 .formLogin(formlogin -> formlogin
-                                                .defaultSuccessUrl("/calendar", true)
+                                                .defaultSuccessUrl("/index", true)
                                                 .permitAll())
                                 .logout(logout -> logout
                                                 .permitAll());
