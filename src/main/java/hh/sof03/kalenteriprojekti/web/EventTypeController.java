@@ -48,7 +48,7 @@ public class EventTypeController {
 
     @PostMapping(value = "/save-eventtype")
     public String saveEventType(@Valid EventType eventType, BindingResult br, Model model) {
-        model.addAttribute("eventtypes", eventTypeRepository.findAll());
+        model.addAttribute("eventtype", new EventType());
         if (br.hasErrors()) {
             return "/addeventtype";
         } else {
@@ -62,7 +62,7 @@ public class EventTypeController {
     public String editEventType(@PathVariable("id") Long eventtypeId, Model model) {
         Optional<EventType> eventType = eventTypeRepository.findById(eventtypeId);
         model.addAttribute("eventtype", eventType.get());
-        return "/editeventtype";
+        return "editeventtype";
     }
 
     @PostMapping(value = "/save-eventtype-edits")

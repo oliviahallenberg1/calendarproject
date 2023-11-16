@@ -45,7 +45,7 @@ public class NoteController {
     public String saveEvent(@Valid Note note, BindingResult br, Model model) {
         model.addAttribute("notes", noteRepository.findAll());
         if (br.hasErrors()) {
-            return "/addnote";
+            return "addnote";
         } else {
 
             noteRepository.save(note);
@@ -57,7 +57,7 @@ public class NoteController {
     public String editNote(@PathVariable("id") Long noteId, Model model) {
         Optional<Note> note = noteRepository.findById(noteId);
         model.addAttribute("note", note.get());
-        return "/editnote";
+        return "editnote";
     }
 
     @PostMapping(value = "/save-note-edits")

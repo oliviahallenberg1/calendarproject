@@ -21,10 +21,10 @@
 
     <div>
         <form th:object="${eventtype}" th:action="@{save-eventtype}" action="#" method="post">
-            <label for="name">Name</label>
-            <input type="text" id="name" th:field="*{eventTypeName}" />
-
-            <input type="submit" value="Save"></input>
+            <input type="hidden" th:field="*{eventTypeId}" class="form-control" />
+            <div th:if="${#fields.hasErrors('eventTypeName')}" th:errors="*{eventTypeName}">Error</div>
+            <input type="text" th:field="*{eventTypeName}" />
+            <input type="submit" value="Submit" />
 
         </form>
     </div>
