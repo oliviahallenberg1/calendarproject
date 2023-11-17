@@ -85,7 +85,7 @@ public class EventController {
         Optional<Event> event = eventRepository.findById(eventId);
         model.addAttribute("event", event.get());
         model.addAttribute("eventtypes", eventTypeRepository.findAll());
-        return "/editevent";
+        return "editevent";
     }
 
     @PostMapping(value = "/save-event-edits")
