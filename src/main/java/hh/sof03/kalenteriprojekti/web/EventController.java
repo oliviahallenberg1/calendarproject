@@ -73,7 +73,7 @@ public class EventController {
     public String saveEvent(@Valid Event event, BindingResult br, Model model) {
         model.addAttribute("events", eventRepository.findAll());
         if (br.hasErrors()) {
-            return "/addevent";
+            return "addevent";
         } else {
             eventRepository.save(event);
             return "redirect:/calendar";
